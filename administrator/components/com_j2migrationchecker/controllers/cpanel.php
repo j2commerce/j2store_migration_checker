@@ -31,7 +31,7 @@ class J2MigrationCheckerControllerCpanel extends F0FController
         //JToolBarHelper::publish('testpublish');
         JToolBarHelper::unpublish('customunpublish');
         F0FModel::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_j2migrationchecker/models');
-        $model = FOFModel::getTmpInstance('J2MigrationCheckers', 'J2MigrationCheckerModel');
+        $model = F0FModel::getTmpInstance('J2MigrationCheckers', 'J2MigrationCheckerModel');
         $list_components = $model->getListComponents();
         $list_plugins = $model->getListPlugins();
         $list_modules = $model->getListModules();
@@ -66,7 +66,7 @@ class J2MigrationCheckerControllerCpanel extends F0FController
 
     public function getRenamedTemaplateOverride(){
         F0FModel::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_j2migrationchecker/models');
-        $model = FOFModel::getTmpInstance('J2MigrationCheckers', 'J2MigrationCheckerModel');
+        $model = F0FModel::getTmpInstance('J2MigrationCheckers', 'J2MigrationCheckerModel');
         $template_override = $model->getTemplate();
         $template_overridePath = [];
         foreach ($template_override as $key => $value){
@@ -86,7 +86,7 @@ class J2MigrationCheckerControllerCpanel extends F0FController
     public function installStatus()
     {
         F0FModel::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_j2migrationchecker/models');
-        $model = FOFModel::getTmpInstance('J2MigrationCheckers', 'J2MigrationCheckerModel');
+        $model = F0FModel::getTmpInstance('J2MigrationCheckers', 'J2MigrationCheckerModel');
         $components_status = $model->componentsStatus();
         $modules_status = $model->modulesStatus();
         $plugins_status = $model->pluginsStatus();
