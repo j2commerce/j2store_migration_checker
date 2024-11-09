@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.2.0" method="upgrade">
-    <name>J2Migration Checker</name>
+    <name>J2Store Migration Checker</name>
     <author>Adam Melcher, Olivier Buisard, Ramesh Elamathi</author>
     <creationDate>11/2024</creationDate>
     <copyright>Copyright (c) 2024 J2Commerce. All rights reserved.</copyright>
@@ -8,14 +8,14 @@
     <authorUrl>https://j2commerce.com</authorUrl>
     <version>1.0.4</version>
     <license>https://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3 or later</license>
-    <description>J2store v3 to v4 migration check</description>
+    <description>J2store v3 to v4 migration checker</description>
     <scriptfile>script.j2migrationchecker.php</scriptfile>
     <files folder="components/com_j2migrationchecker">
         <filename>index.html</filename>
         <filename>j2migrationchecker.php</filename>
     </files>
     <administration>
-        <menu link='index.php?option=com_j2migrationchecker'>J2Store Migration Checker</menu>
+        <menu link='index.php?option=com_j2migrationchecker'>COM_J2MIGRATIONCHECKER</menu>
         <files folder="administrator/components/com_j2migrationchecker">
             <filename>index.html</filename>
             <filename>j2migrationchecker.php</filename>
