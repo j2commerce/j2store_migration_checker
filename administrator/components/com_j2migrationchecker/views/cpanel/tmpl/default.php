@@ -1,23 +1,21 @@
+<?php
+/**
+ * @copyright Copyright (C) 2014-2019 Weblogicx India. All rights reserved.
+ * @copyright Copyright (C) 2024 J2Commerce, Inc. All rights reserved.
+ * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3 or later
+ * @website https://www.j2commerce.com
+ */
+// No direct access to this file
+defined('_JEXEC') or die;
 
-    <?php
-    /**
-     * @package     Joomla.Administrator
-     * @subpackage  com_helloworld
-     *
-     * @copyright   Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.
-     * @license     GNU General Public License version 2 or later; see LICENSE.txt
-     */
-    // No direct access to this file
-    defined('_JEXEC') or die('Restricted Access');
-    require_once JPATH_ADMINISTRATOR.'/components/com_j2store/helpers/j2html.php';
-
-    ?>
-    <style type="text/css">
-        input[disabled] {
-            background-color: #46a546 !important;
-        }
-    </style>
-    <div class="well">
+require_once JPATH_ADMINISTRATOR.'/components/com_j2store/helpers/j2html.php';
+?>
+<style type="text/css">
+    input[disabled] {
+        background-color: #46a546 !important;
+    }
+</style>
+<div class="well">
     <form action="<?php echo JRoute::_('index.php'); ?>" method="post" id="adminForm" name="adminForm">
         <?php echo J2Html::hidden('option','com_j2migrationchecker');?>
         <?php echo J2Html::hidden('view','cpanel');?>

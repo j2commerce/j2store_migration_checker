@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.2.0" method="upgrade">
-    <name>J2Migration checker</name>
-    <creationDate>JAN 2024</creationDate>
-    <author>Thomas</author>
-    <copyright>Copyright (c) 2023 Cartrabbit. All rights reserved.</copyright>
-    <authorEmail>support@j2store.org</authorEmail>
-    <authorUrl>https://www.j2store.org</authorUrl>
-    <version>1.0.3</version>
-    <license>https://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
-    <description>J2store V4 Migration check</description>
+    <name>J2Store Migration Checker</name>
+    <author>Adam Melcher, Olivier Buisard, Ramesh Elamathi</author>
+    <creationDate>11/2024</creationDate>
+    <copyright>Copyright (c) 2024 J2Commerce. All rights reserved.</copyright>
+    <authorEmail>support@j2commerce.com</authorEmail>
+    <authorUrl>https://j2commerce.com</authorUrl>
+    <version>1.0.4</version>
+    <license>https://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3 or later</license>
+    <description>J2store v3 to v4 migration checker</description>
     <scriptfile>script.j2migrationchecker.php</scriptfile>
     <files folder="components/com_j2migrationchecker">
         <filename>index.html</filename>
         <filename>j2migrationchecker.php</filename>
     </files>
-    <administration>>
-        <menu link='index.php?option=com_j2migrationchecker'>J2Migration checker</menu>
+    <administration>
+        <menu link='index.php?option=com_j2migrationchecker'>COM_J2MIGRATIONCHECKER</menu>
         <files folder="administrator/components/com_j2migrationchecker">
             <filename>index.html</filename>
             <filename>j2migrationchecker.php</filename>
