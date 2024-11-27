@@ -5,8 +5,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3 or later
  * @website https://www.j2commerce.com
  */
-// No direct access to this file
+
 defined('_JEXEC') or die;
+
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
 
 $row_class = 'row';
 $col_class = 'co-md-';
@@ -18,10 +22,10 @@ if (version_compare(JVERSION, '3.99.99', 'lt')) {
 <?php if (!empty($this->list_modules)) : ?>
   <div class="<?php echo $row_class ?>">
     <div class="<?php echo $col_class ?>8">
-        <h3><?php echo JText::_('COM_EXTENSIONCHECK_J2STORE_MODULES');?></h3>
+        <h3><?php echo Text::_('COM_EXTENSIONCHECK_J2STORE_MODULES');?></h3>
     </div>
     <div class="<?php echo $col_class ?>1">
-        <h3>Status :</h3>
+        <h3><?php echo Text::_('COM_EXTENSIONCHECK_STATUS');?></h3>
     </div>
     <div class="<?php echo $col_class ?>3">
         <?php $alert_class =  ($this->modules_status == 'Ready to install' )? 'alert-success' : 'alert-danger' ; ?>
@@ -38,17 +42,17 @@ if (version_compare(JVERSION, '3.99.99', 'lt')) {
             <?php //echo JHtml::_('grid.checkall','module-checkbox-table3'); ?>
         </th>
         <th >
-            <?php echo JText::_('COM_EXTENSIONCHECK_MODULE_NAME') ;?>
+            <?php echo Text::_('COM_EXTENSIONCHECK_MODULE_NAME') ;?>
         </th>
         <th >
-            <?php echo JText::_('COM_EXTENSIONCHECK_MODULE_TYPE'); ?>
+            <?php echo Text::_('COM_EXTENSIONCHECK_MODULE_TYPE'); ?>
         </th>
         <th >
-            <?php echo JText::_('COM_EXTENSIONCHECK_MODULE_ID'); ?>
+            <?php echo Text::_('COM_EXTENSIONCHECK_MODULE_ID'); ?>
         </th>
 
         <th >
-            <?php echo JText::_('COM_EXTENSIONCHECK_ENABLED'); ?>
+            <?php echo Text::_('COM_EXTENSIONCHECK_ENABLED'); ?>
         </th>
 
     </tr>
@@ -58,7 +62,7 @@ if (version_compare(JVERSION, '3.99.99', 'lt')) {
             ?>
             <tr>
                 <td>
-                    <?php echo JHtml::_('grid.id', $i, $row->extension_id); ?>
+                    <?php echo HTMLHelper::_('grid.id', $i, $row->extension_id); ?>
                 </td>
                 <td>
                     <?php echo $row->name; ?>
@@ -76,10 +80,10 @@ if (version_compare(JVERSION, '3.99.99', 'lt')) {
                     <?php $disabled_link =  isset($row->enabled) && !empty($row->enabled ) ? '' : 'pointer-events: none'; ?>
                     <div class="btn-toolbar">
                         <div class="btn-wrapper">
-                            <a style="<?php echo $disabled_link; ?>" href="<?php echo JRoute::_( "index.php?option=com_j2migrationchecker&view=cpanel&task=customunpublish&cid= $row->extension_id",false) ?>" >
+                            <a style="<?php echo $disabled_link; ?>" href="<?php echo Route::_( "index.php?option=com_j2migrationchecker&view=cpanel&task=customunpublish&cid= $row->extension_id",false) ?>" >
                             <span class="btn btn-sm btn-small <?php echo $btn_class; ?>" id="">
                                 <i class="<?php echo $icon_class; ?>"></i>
-                                    <?php echo JText::_($unpublish_label); ?>
+                                    <?php echo Text::_($unpublish_label); ?>
                             </span>
                             </a>
                         </div>
