@@ -19,13 +19,13 @@ class Com_J2MigrationCheckerInstallerScript
         $version_file = JPATH_ADMINISTRATOR . '/components/com_j2store/version.php';
         if (JFile::exists($version_file)) {
             require_once($version_file);
-            // abort if the current J2Store release is older
-            if (($type == 'install') && version_compare(J2STORE_VERSION, '3.99.99', 'ge')) {
-                $app->enqueueMessage('You are using an latest version of J2Store. No need to migrate', 'warning');
+            // abort if the current J2Store release is higher than 4.0.5
+            if (($type == 'install') && version_compare(J2STORE_VERSION, '4.0.6', 'ge')) {
+                $app->enqueueMessage('You are using a later version of J2Store 4 (higher than 4.0.5). To migrate from Joomla 3, please install 4.0.5.', 'warning');
                 return false;
             }
         } else {
-            $app->enqueueMessage('J2Store not found or the version file is not found. Make sure that you have installed J2Store before installing this plugin', 'warning');
+            $app->enqueueMessage('J2Store was not found. Make sure you have installed J2Store before installing this extension.', 'warning');
             return false;
         }
 
