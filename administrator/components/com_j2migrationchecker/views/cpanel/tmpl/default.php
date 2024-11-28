@@ -13,6 +13,12 @@ use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
 
 $alert_class = $this->components_status !== 'Not Ready' && $this->modules_status !== 'Not Ready' && $this->plugins_status !== 'Not Ready' && $this->templates_status !== 'Not Ready' ? 'alert-success' : 'alert-danger';
+
+$extension_version = null;
+$extension_xml = simplexml_load_file(JPATH_ADMINISTRATOR . '/components/com_j2store/com_j2store.xml');
+if ($extension_xml != false) {
+    $extension_version = strval($extension_xml->version);
+}
 ?>
 <style>
     input[disabled] {
@@ -28,8 +34,12 @@ $alert_class = $this->components_status !== 'Not Ready' && $this->modules_status
 
         <div class="alert <?php echo $alert_class; ?> center">
             <?php if ($this->install_status) : ?>
-                <h4 class="alert-heading"><?php echo Text::_('COM_EXTENSIONCHECK_INSTALLATION_STATUS'); ?></h4><br>
-                <a href="<?php echo Route::_('index.php?option=com_installer&view=update&filter_search=j2store'); ?>" class="btn btn-large btn-info"><?php echo Text::_('COM_EXTENSIONCHECK_INSTALLATION_INSTALL'); ?></a>
+                <?php if (version_compare($extension_version, '4.0.0', 'lt')) : ?>
+                    <h4 class="alert-heading"><?php echo Text::_('COM_EXTENSIONCHECK_INSTALLATION_STATUS'); ?></h4><br>
+                    <a href="<?php echo Route::_('index.php?option=com_installer&view=update&filter_search=j2store'); ?>" class="btn btn-large btn-info"><?php echo Text::_('COM_EXTENSIONCHECK_INSTALLATION_INSTALL'); ?></a>
+                <?php else : ?>
+                    <h4 class="alert-heading"><?php echo Text::_('COM_EXTENSIONCHECK_JOOMLA_INSTALLATION_STATUS'); ?></h4>
+                <?php endif; ?>
             <?php else: ?>
                 <h4 class="alert-heading"><?php echo Text::_('COM_EXTENSIONCHECK_DEFAULT_INSTALLATION_STATUS'); ?></h4>
             <?php endif; ?>
