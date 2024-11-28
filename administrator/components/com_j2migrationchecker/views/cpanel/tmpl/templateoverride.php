@@ -20,7 +20,7 @@ if (version_compare(JVERSION, '3.99.99', 'lt')) {
         <h3><?php echo JText::_('COM_EXTENSIONCHECK_J2STORE_TEMPLATE_OVERRIDES');?></h3>
     </div>
     <div class="<?php echo $col_class; ?>1">
-        <h3>Status :</h3>
+        <h3><?php echo JText::_('COM_EXTENSIONCHECK_STATUS');?></h3>
     </div>
     <div class="<?php echo $col_class; ?>3">
         <?php $alert_class =  ($this->templates_status == 'Ready to install' )? 'alert-success' : 'alert-danger' ; ?>
@@ -53,7 +53,6 @@ if (version_compare(JVERSION, '3.99.99', 'lt')) {
     </div>
  <?php endif; ?>
 <?php  if (!empty($this->renamed_template_override)) : ?>
-
     <div class="alert alert-info">
         <h4 class="alert-heading">Renamed Template override file</h4>
      <?php foreach ($this->renamed_template_override as $key => $value) : ?>
