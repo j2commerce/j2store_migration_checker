@@ -44,14 +44,44 @@ class J2MigrationCheckerModelJ2MigrationCheckers extends F0FModel
         return $db->loadObjectList();
 
     }
-    public function getListPlugins(){
+    public function getListPlugins()
+    {
         $db = JFactory::getDbo();
         $query = $db->getQuery(true);
         $this->getSelectQuery($query);
         $query->where("type='plugin'");
         $query->where("folder='j2store' or element='easycheckout'");
         $db->setQuery($query);
-        return  $db->loadObjectList();
+
+        $items = $db->loadObjectList();
+
+        $core_plugins = array();
+        $core_plugins[] = 'app_bootstrap3'; // in v4.0.5
+        $core_plugins[] = 'app_bootstrap4'; // in v4.0.5
+        $core_plugins[] = 'app_bootstrap5'; // in v4.0.5
+        $core_plugins[] = 'app_currencyupdater';
+        $core_plugins[] = 'app_diagnostics';
+        $core_plugins[] = 'app_flexivariable';
+        $core_plugins[] = 'app_localization_data';
+        $core_plugins[] = 'app_schemaproducts';
+        $core_plugins[] = 'payment_banktransfer';
+        $core_plugins[] = 'payment_cash';
+        $core_plugins[] = 'payment_moneyorder';
+        $core_plugins[] = 'payment_paypal';
+        $core_plugins[] = 'payment_sagepayform';
+        $core_plugins[] = 'report_itemised';
+        $core_plugins[] = 'report_products';
+        $core_plugins[] = 'shipping_free';
+        $core_plugins[] = 'shipping_standard';
+
+        foreach ($items as $item) {
+            $item->core = 0;
+            if (in_array($item->element, $core_plugins)) {
+                $item->core = 1;
+            }
+        }
+
+        return $items;
     }
 
     public function getListModules(){
@@ -61,8 +91,16 @@ class J2MigrationCheckerModelJ2MigrationCheckers extends F0FModel
         $query->where("type='module'");
         $db->setQuery($query);
         $data =   $db->loadObjectList();
-        $j2store_module =  array('mod_j2store_related_products','mod_j2store_search','mod_j2store_categories','mod_j2products','mod_j2store_cart','mod_j2store_menu');
-       // in_array()
+
+        // why this list? 2 are core J2Store (cart and menu)
+        $j2store_module = array();
+        $j2store_module[] = 'mod_j2store_related_products';
+        $j2store_module[] = 'mod_j2store_search';
+        $j2store_module[] = 'mod_j2store_categories';
+        $j2store_module[] = 'mod_j2products';
+        $j2store_module[] = 'mod_j2store_cart';
+        $j2store_module[] = 'mod_j2store_menu';
+
         $result = [];
         foreach($data as $key => $value) {
              if(isset($value->element) && !empty($value->element)){

@@ -5,35 +5,52 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3 or later
  * @website https://www.j2commerce.com
  */
-// No direct access to this file
+
 defined('_JEXEC') or die;
 
-require_once JPATH_ADMINISTRATOR.'/components/com_j2store/helpers/j2html.php';
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
+
+$alert_class = $this->components_status !== 'Not Ready' && $this->modules_status !== 'Not Ready' && $this->plugins_status !== 'Not Ready' && $this->templates_status !== 'Not Ready' ? 'alert-success' : 'alert-danger';
+
+$extension_version = null;
+$extension_xml = simplexml_load_file(JPATH_ADMINISTRATOR . '/components/com_j2store/com_j2store.xml');
+if ($extension_xml != false) {
+    $extension_version = strval($extension_xml->version);
+}
 ?>
-<style type="text/css">
+<style>
     input[disabled] {
         background-color: #46a546 !important;
     }
 </style>
 <div class="well">
-    <form action="<?php echo JRoute::_('index.php'); ?>" method="post" id="adminForm" name="adminForm">
-        <?php echo J2Html::hidden('option','com_j2migrationchecker');?>
-        <?php echo J2Html::hidden('view','cpanel');?>
-        <?php echo J2Html::hidden('task','',array('id'=>'task'));?>
-        <?php echo JHtml::_('form.token'); ?>
-        <?php $alert_class = $this->components_status !== 'Not Ready' && $this->modules_status !== 'Not Ready' && $this->plugins_status !== 'Not Ready' && $this->templates_status !== 'Not Ready' ? 'alert-success' : 'alert-danger'  ;?>
+    <form action="<?php echo Route::_('index.php'); ?>" method="post" id="adminForm" name="adminForm">
+        <input type="hidden" name="option" value="com_j2migrationchecker" />
+        <input type="hidden" name="view" value="cpanel" />
+        <input type="hidden" name="task" id="task" value="" />
+        <?php echo HTMLHelper::_('form.token'); ?>
+
         <div class="alert <?php echo $alert_class; ?> center">
-            <h4 class="alert-heading"><?php echo $this->install_status; ?></h4>
-        </div
+            <?php if ($this->install_status) : ?>
+                <?php if (version_compare($extension_version, '4.0.0', 'lt')) : ?>
+                    <h4 class="alert-heading"><?php echo Text::_('COM_EXTENSIONCHECK_INSTALLATION_STATUS'); ?></h4><br>
+                    <a href="<?php echo Route::_('index.php?option=com_installer&view=update&filter_search=j2store'); ?>" class="btn btn-large btn-info"><?php echo Text::_('COM_EXTENSIONCHECK_INSTALLATION_INSTALL'); ?></a>
+                <?php else : ?>
+                    <h4 class="alert-heading"><?php echo Text::_('COM_EXTENSIONCHECK_JOOMLA_INSTALLATION_STATUS'); ?></h4>
+                <?php endif; ?>
+            <?php else: ?>
+                <h4 class="alert-heading"><?php echo Text::_('COM_EXTENSIONCHECK_DEFAULT_INSTALLATION_STATUS'); ?></h4>
+            <?php endif; ?>
+        </div>
         <br>
-             <?php include 'components.php';?>
+        <?php include 'components.php';?>
         <br>
         <?php include 'plugins.php';?>
         <br>
         <?php include 'modules.php';?>
         <br>
         <?php include 'templateoverride.php';?>
-
-        <?php echo JHtml::_('form.token'); ?>
     </form>
 </div>
