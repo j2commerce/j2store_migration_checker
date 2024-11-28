@@ -103,10 +103,10 @@ class J2MigrationCheckerControllerCpanel extends F0FController
             $newFolderPath = str_replace('com_j2store', 'old_com_j2store', $data['folder_Path']);
             if (rename($data['folder_Path'], $newFolderPath)) {
                // $this->setMessage("Folder renamed successfully.");
-                $this->setRedirect($link,Text::_("COM_EXTENSIONCHECK_RENAMED_SUCCESSFULLY"));
+                $this->setRedirect($link, Text::_("COM_EXTENSIONCHECK_RENAMED_SUCCESSFULLY"));
             } else {
                // $this->setMessage("Error renaming the folder.");
-                $this->setRedirect($link,Text::_("COM_EXTENSIONCHECK_RENAMED_FAILED"));
+                $this->setRedirect($link, Text::_("COM_EXTENSIONCHECK_RENAMED_FAILED"));
             }
         }
 
