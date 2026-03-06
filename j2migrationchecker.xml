@@ -1,31 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="3.2.0" method="upgrade">
+<extension type="component" method="upgrade">
     <name>COM_J2MIGRATIONCHECKER</name>
-    <author>Adam Melcher, Olivier Buisard, Ramesh Elamathi</author>
-    <creationDate>11/2024</creationDate>
-    <copyright>Copyright (c) 2024 J2Commerce. All rights reserved.</copyright>
+    <author>Adam Melcher, Olivier Buisard</author>
+    <creationDate>MAR 2026</creationDate>
+    <copyright>Copyright (c) 2024-26 J2Commerce. All rights reserved.</copyright>
     <authorEmail>support@j2commerce.com</authorEmail>
     <authorUrl>https://j2commerce.com</authorUrl>
-    <version>1.0.5</version>
+    <version>2.0.0</version>
     <license>https://www.gnu.org/licenses/gpl-3.0.html GNU/GPLv3 or later</license>
-    <description>J2store v3 to v4 migration checker</description>
+    <description>COM_J2MIGRATIONCHECKER_DESCRIPTION</description>
+    <namespace path="src">J2Commerce\Component\J2migrationchecker</namespace>
     <scriptfile>script.j2migrationchecker.php</scriptfile>
-    <files folder="components/com_j2migrationchecker">
-        <filename>index.html</filename>
-        <filename>j2migrationchecker.php</filename>
-    </files>
     <administration>
         <menu link="index.php?option=com_j2migrationchecker">COM_J2MIGRATIONCHECKER</menu>
         <files folder="administrator/components/com_j2migrationchecker">
-            <filename>index.html</filename>
-            <filename>j2migrationchecker.php</filename>
-            <folder>controllers</folder>
-            <folder>models</folder>
-            <folder>views</folder>
+            <folder>services</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
         </files>
-        <languages folder="language/backend">
-            <language tag="en-GB">en-GB/en-GB.com_j2migrationchecker.ini</language>
-            <language tag="en-GB">en-GB/en-GB.com_j2migrationchecker.sys.ini</language>
+        <languages folder="language">
+            <language tag="en-GB">en-GB/com_j2migrationchecker.ini</language>
+            <language tag="en-GB">en-GB/com_j2migrationchecker.sys.ini</language>
+            <language tag="de-DE">de-DE/com_j2migrationchecker.ini</language>
+            <language tag="de-DE">de-DE/com_j2migrationchecker.sys.ini</language>
+            <language tag="es-ES">es-ES/com_j2migrationchecker.ini</language>
+            <language tag="es-ES">es-ES/com_j2migrationchecker.sys.ini</language>
+            <language tag="pt-PT">pt-PT/com_j2migrationchecker.ini</language>
+            <language tag="pt-PT">pt-PT/com_j2migrationchecker.sys.ini</language>
+            <language tag="it-IT">it-IT/com_j2migrationchecker.ini</language>
+            <language tag="it-IT">it-IT/com_j2migrationchecker.sys.ini</language>
+            <language tag="nl-NL">nl-NL/com_j2migrationchecker.ini</language>
+            <language tag="nl-NL">nl-NL/com_j2migrationchecker.sys.ini</language>
+            <language tag="fr-FR">fr-FR/com_j2migrationchecker.ini</language>
+            <language tag="fr-FR">fr-FR/com_j2migrationchecker.sys.ini</language>
+            <language tag="ru-RU">ru-RU/com_j2migrationchecker.ini</language>
+            <language tag="ru-RU">ru-RU/com_j2migrationchecker.sys.ini</language>
+            <language tag="el-GR">el-GR/com_j2migrationchecker.ini</language>
+            <language tag="el-GR">el-GR/com_j2migrationchecker.sys.ini</language>
+            <language tag="ar-AA">ar-AA/com_j2migrationchecker.ini</language>
+            <language tag="ar-AA">ar-AA/com_j2migrationchecker.sys.ini</language>
+            <language tag="ja-JP">ja-JP/com_j2migrationchecker.ini</language>
+            <language tag="ja-JP">ja-JP/com_j2migrationchecker.sys.ini</language>
+            <language tag="pl-PL">pl-PL/com_j2migrationchecker.ini</language>
+            <language tag="pl-PL">pl-PL/com_j2migrationchecker.sys.ini</language>
+            <language tag="sv-SE">sv-SE/com_j2migrationchecker.ini</language>
+            <language tag="sv-SE">sv-SE/com_j2migrationchecker.sys.ini</language>
+            <language tag="he-IL">he-IL/com_j2migrationchecker.ini</language>
+            <language tag="he-IL">he-IL/com_j2migrationchecker.sys.ini</language>
         </languages>
     </administration>
 </extension>
