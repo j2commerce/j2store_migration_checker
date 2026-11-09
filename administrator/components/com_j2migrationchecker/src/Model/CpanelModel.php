@@ -44,11 +44,13 @@ class CpanelModel extends AdminModel
         $db->setQuery($query);
 
         try {
-            return $db->loadObjectList();
+            $items = $db->loadObjectList();
         } catch (\Exception $e) {
             Factory::getApplication()->enqueueMessage($e->getMessage(), 'error');
             return [];
         }
+
+        return array_values(array_filter($items, [$this, 'isPreJ2CommerceV6']));
     }
 
     /**
@@ -111,6 +113,9 @@ class CpanelModel extends AdminModel
             Factory::getApplication()->enqueueMessage($e->getMessage(), 'error');
             return [];
         }
+
+        // Exclude any plugin belonging to a J2Commerce v6+ package
+        $items = array_values(array_filter($items, [$this, 'isPreJ2CommerceV6']));
 
         // Define core J2Store plugins
         $corePlugins = [
@@ -216,6 +221,10 @@ class CpanelModel extends AdminModel
         $result = [];
         foreach ($allModules as $module) {
             if (!empty($module->element) && in_array($module->element, $j2storeModules, true)) {
+                if (!$this->isPreJ2CommerceV6($module)) {
+                    continue;
+                }
+
                 $module->core = in_array($module->element, $coreModules, true) ? 1 : 0;
                 $result[] = $module;
             }
@@ -499,16 +508,38 @@ class CpanelModel extends AdminModel
                 }
             }
 
-            Factory::getApplication()->enqueueMessage(
-                Text::sprintf('COM_J2MIGRATIONCHECKER_ALL_EXTENSIONS_DISABLED', count($trackedIds)),
-                'success'
-            );
-
             return true;
         } catch (\Exception $e) {
             Factory::getApplication()->enqueueMessage($e->getMessage(), 'error');
             return false;
         }
+    }
+
+    /**
+     * Determine whether an extension's manifest version is below J2Commerce 6,
+     * so that J2Commerce v6 packages (already compatible with Joomla 6) are
+     * never offered for disabling/enabling by this legacy migration checker.
+     *
+     * @param object $row Extension row from #__extensions, with manifest_cache available.
+     * @return bool True if the extension's version is below 6, or unknown.
+     */
+    private function isPreJ2CommerceV6($row)
+    {
+        if (empty($row->manifest_cache)) {
+            return true;
+        }
+
+        $manifest = json_decode($row->manifest_cache, true);
+        if (!is_array($manifest) || empty($manifest['version'])) {
+            return true;
+        }
+
+        $version = preg_replace('/[^0-9.].*$/', '', (string) $manifest['version']);
+        if ($version === '' || !version_compare($version, '0.0.1', '>=')) {
+            return true;
+        }
+
+        return version_compare($version, '6.0.0', '<');
     }
 
     /**

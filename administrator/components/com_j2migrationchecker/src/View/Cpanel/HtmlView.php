@@ -115,10 +115,10 @@ class HtmlView extends BaseHtmlView
             ToolbarHelper::unpublish('cpanel.unpublish', 'JTOOLBAR_DISABLE', true);
         }
 
-        // Only show 'Enable All Disabled' button on Joomla 6+
+        // Only show 'Enable All Disabled' / 'Disable All Tracked' buttons on Joomla 6+
         if (version_compare(JVERSION, '6.0.0', '>=')) {
             ToolbarHelper::custom('cpanel.publishall', 'refresh', '', 'COM_J2MIGRATIONCHECKER_ENABLE_ALL', false, false);
-            //ToolbarHelper::custom('cpanel.unpublishall', 'refresh', '', 'COM_J2MIGRATIONCHECKER_DISABLE_ALL', false, false);
+            ToolbarHelper::custom('cpanel.unpublishall', 'refresh', '', 'COM_J2MIGRATIONCHECKER_DISABLE_ALL', false, false);
         }
 
         ToolbarHelper::help(null, false, 'https://www.j2commerce.com/update-j2commerce-4-to-joomla-6');
